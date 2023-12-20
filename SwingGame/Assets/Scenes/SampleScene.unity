@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 98809341}
   - component: {fileID: 98809340}
   - component: {fileID: 98809339}
-  - component: {fileID: 98809342}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -2787,18 +2786,6 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
---- !u!114 &98809342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 98809335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c3e353d8215c584791059b33e55bda4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &311823384
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,7 +3086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c51a36730134a7791fcbcecd824843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myRigidbody: {fileID: 0}
+  myRigidbody: {fileID: 1099406885}
 --- !u!61 &1099406887
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3392,3 +3379,4 @@ SceneRoots:
   - {fileID: 1099406883}
   - {fileID: 1590618500}
   - {fileID: 311823386}
+  - {fileID: 1518850363}
