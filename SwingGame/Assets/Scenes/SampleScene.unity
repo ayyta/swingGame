@@ -311,6 +311,7 @@ GameObject:
   - component: {fileID: 1099406882}
   - component: {fileID: 1099406885}
   - component: {fileID: 1099406884}
+  - component: {fileID: 1099406886}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -419,7 +420,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.47
+  m_Radius: 0.44
 --- !u!50 &1099406885
 Rigidbody2D:
   serializedVersion: 4
