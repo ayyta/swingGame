@@ -14,27 +14,24 @@ public class CharacterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            myRigidbody.velocity = Vector2.up * 5;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            myRigidbody.velocity = Vector2.left * 5;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            myRigidbody.velocity = Vector2.right * 5;
-        }
-        else if (Input.GetKey(KeyCode.W))
+        // Check for jump input
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             myRigidbody.velocity = Vector2.up * 5;
         }
         else
         {
-            // If no keys are pressed, stop the movement
-            myRigidbody.velocity = Vector2.zero;
+            // Get input values for horizontal and vertical axes
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+
+            // Calculate the movement direction
+            Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
+
+            // Set the velocity based on the calculated movement direction
+            myRigidbody.velocity = new Vector2(movement.x * 5, movement.y * 5);
         }
     }
+
 
 }
