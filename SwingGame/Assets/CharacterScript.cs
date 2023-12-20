@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class CharacterScript : MonoBehaviour
 {
+    public Rigidbody2D myRigidbody;
     // Start is called before the first frame update
     void Start()
     {
-
+        myRigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         // Check for jump input
-        if (Input.GetKeyDown("space"))
+        if (Input.GetButtonDown("Jump"))
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.up * 14;
+            myRigidbody.velocity = Vector2.up * 14;
         }
         else
         {
@@ -24,15 +25,7 @@ public class CharacterScript : MonoBehaviour
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
-            // Calculate the movement direction
-            Vector2 movement = new Vector2(horizontalInput, verticalInput).normalized;
-
-            // Only set velocity if there is non-zero input
-            if (movement.magnitude > 0)
-            {
-                // Set the velocity based on the calculated movement direction
-                GetComponent<Rigidbody2D>().velocity = new Vector2(movement.x * 5, movement.y * 5);
-            }
+            myRigidbody.velocity = new Vector2(horizontalInput * 7f, myRigidbody.velocity.y);
         }
     }
 }
