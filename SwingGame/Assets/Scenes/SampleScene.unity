@@ -227,6 +227,7 @@ GameObject:
   - component: {fileID: 1099406882}
   - component: {fileID: 1099406885}
   - component: {fileID: 1099406884}
+  - component: {fileID: 1099406886}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -335,7 +336,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.47
+  m_Radius: 0.44
 --- !u!50 &1099406885
 Rigidbody2D:
   serializedVersion: 4
@@ -363,6 +364,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1099406886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099406881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57c51a36730134a7791fcbcecd824843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myRigidbody: {fileID: 1099406885}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
