@@ -22,8 +22,7 @@ public class CharacterScript : MonoBehaviour
         else
         {
             // Get input values for horizontal and vertical axes
-            float horizontalInput = Input.GetAxis("Horizontal");
-            float verticalInput = Input.GetAxis("Vertical");
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
 
             myRigidbody.velocity = new Vector2(horizontalInput * 7f, myRigidbody.velocity.y);
         }
