@@ -17,7 +17,7 @@ public class CharacterScript : MonoBehaviour
         // Check for jump input
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myRigidbody.velocity = Vector2.up * 5;
+            myRigidbody.velocity = Vector2.up * 10;
         }
         else
         {
