@@ -15,7 +15,6 @@ public class CharacterScript : MonoBehaviour
     void Update()
     {
         // Check for jump input
-
         if (Input.GetButtonDown("Jump"))
         {
             myRigidbody.velocity = Vector2.up * 14;
@@ -26,18 +25,6 @@ public class CharacterScript : MonoBehaviour
             float horizontalInput = Input.GetAxisRaw("Horizontal");
 
             myRigidbody.velocity = new Vector2(horizontalInput * 7f, myRigidbody.velocity.y);
-        }
-
-
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        // Check if the collision is with a wall
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            // Apply a downward force
-            myRigidbody.AddForce(new Vector2(0, -10), ForceMode2D.Force);
         }
     }
 }
