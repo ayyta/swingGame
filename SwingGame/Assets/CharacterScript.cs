@@ -14,6 +14,7 @@ public class CharacterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         // Check for jump input
         if (Input.GetButtonDown("Jump"))
         {
@@ -25,6 +26,16 @@ public class CharacterScript : MonoBehaviour
             float horizontalInput = Input.GetAxisRaw("Horizontal");
 
             myRigidbody.velocity = new Vector2(horizontalInput * 7f, myRigidbody.velocity.y);
+        }
+
+    }
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        // Check if the collision is with a wall
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            myRigidbody.velocity = new Vector2(0, -3);
+            Debug.Log(myRigidbody.velocity);
         }
     }
 }
