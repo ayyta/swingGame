@@ -5,12 +5,14 @@ using UnityEngine;
 public class Grapple : MonoBehaviour
 {
     [SerializeField] private float grappleLength;
-    [SerializeField] private LayerMask grappleLayer;
+    [SerializeField] private LayerMask wallLayer; // Layer for the walls
     [SerializeField] private LineRenderer rope;
+    [SerializeField] private Transform wallCheck; // A point on the player to check for walls
+    [SerializeField] private float wallCheckRadius; // How close to check for a wall
+    [SerializeField] private DistanceJoint2D joint;
 
-    private Vector3 grapplePoint;
-    private DistanceJoint2D joint;
-    // Start is called before the first frame update
+    private bool isGrappling = false;
+
     void Start()
     {
         joint = gameObject.GetComponent<DistanceJoint2D>();
@@ -18,41 +20,70 @@ public class Grapple : MonoBehaviour
         rope.enabled = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !rope.enabled)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(
-                origin: transform.position,
-                direction: Vector2.zero,
-                distance: Mathf.Infinity,
-                layerMask: grappleLayer
-            ) ;
+        // Check if 'F' key is pressed and the player is not already grappling
 
-            if (hit.collider != null && (grappleLayer.value & (1 << hit.collider.gameObject.layer)) > 0) // assigns grappler point to ceiling
+        if (Input.GetKeyDown(KeyCode.F) && !isGrappling)
+        {
+            // Detect walls around the WallCheck position
+            Collider2D[] hits = Physics2D.OverlapCircleAll(wallCheck.position, wallCheckRadius, wallLayer);
+
+            // Find the closest wall if there are multiple
+            Collider2D closestWall = null;
+            float closestDistance = float.MaxValue;
+            foreach (Collider2D hit in hits)
             {
-                grapplePoint = hit.point;
-                grapplePoint.z = 0;
-                joint.connectedAnchor = grapplePoint;
+                if (hit.gameObject != gameObject) // Make sure it's not the player
+                {
+                    float distance = (wallCheck.position - hit.transform.position).sqrMagnitude;
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestWall = hit;
+                    }
+                }
+            }
+
+            // If a wall was found, attach the grappler to it
+            if (closestWall != null)
+            {
+                // Here you might want to find the exact point on the collider to attach to, or just use the hit point
+                Vector2 closestPoint = closestWall.ClosestPoint(wallCheck.position);
+                joint.connectedAnchor = closestPoint;
                 joint.enabled = true;
                 joint.distance = grappleLength;
-                rope.SetPosition(0, grapplePoint);
+
+                rope.SetPosition(0, closestPoint);
                 rope.SetPosition(1, transform.position);
                 rope.enabled = true;
+
+                isGrappling = true;
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.F) && rope.enabled) {
-
+        // Check if 'F' key is released and the player is grappling
+        if (Input.GetKeyUp(KeyCode.F) && isGrappling)
+        {
             joint.enabled = false;
             rope.enabled = false;
+            isGrappling = false;
         }
 
-        if (rope.enabled)
+        // If the rope is enabled, update its position to follow the player and grapple point
+        if (isGrappling)
         {
-            rope.SetPosition(0, grapplePoint);
+            rope.SetPosition(0, joint.connectedAnchor);
             rope.SetPosition(1, transform.position);
         }
     }
+    void OnDrawGizmosSelected()
+    {
+        if (wallCheck == null)
+            return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(wallCheck.position, wallCheckRadius);
+    }
 }
+    
