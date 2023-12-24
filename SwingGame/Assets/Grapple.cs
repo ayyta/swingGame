@@ -65,9 +65,7 @@ public class Grapple : MonoBehaviour
         // Check if 'F' key is released and the player is grappling
         if (Input.GetKeyUp(KeyCode.F) && isGrappling)
         {
-            joint.enabled = false;
-            rope.enabled = false;
-            isGrappling = false;
+            this.ReleaseGrapple();
         }
 
         // If the rope is enabled, update its position to follow the player and grapple point
@@ -76,6 +74,19 @@ public class Grapple : MonoBehaviour
             rope.SetPosition(0, joint.connectedAnchor);
             rope.SetPosition(1, transform.position);
         }
+    }
+
+    public bool IsGrappling()
+    {
+        return isGrappling;
+    }
+
+    public void ReleaseGrapple()
+    {
+        joint.enabled = false;
+        rope.enabled = false;
+        isGrappling = false;
+
     }
     void OnDrawGizmosSelected()
     {
