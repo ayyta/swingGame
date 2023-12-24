@@ -29,13 +29,5 @@ public class CharacterScript : MonoBehaviour
         }
 
     }
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        // Check if the collision is with a wall
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            myRigidbody.velocity = new Vector2(0, -3);
-            Debug.Log(myRigidbody.velocity);
-        }
-    }
+    
 }
