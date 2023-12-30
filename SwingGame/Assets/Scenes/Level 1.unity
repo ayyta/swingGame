@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c51a36730134a7791fcbcecd824843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swingForce: 1
   myRigidbody: {fileID: 1099406885}
 --- !u!114 &1099406887
 MonoBehaviour:
