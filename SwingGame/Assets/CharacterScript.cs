@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterScript : MonoBehaviour
 {
     [SerializeField] private float swingForce;
+
     private Grapple grapple;
     public Rigidbody2D myRigidbody;
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class CharacterScript : MonoBehaviour
 
         if ( grapple.IsGrappling())
         {
+ 
             float input = Input.GetAxis("Horizontal");
             myRigidbody.AddForce(new Vector2(input * swingForce, 0));
 
